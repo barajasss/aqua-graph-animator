@@ -4,12 +4,21 @@ import { withRouter } from 'react-router-dom'
 import { updateOne } from '../../redux/actions'
 import { createArray } from '../../utils'
 
+function arrayToObj(array) {
+	const obj = {}
+	for (let i = 0; i < array.length; i++) {
+		obj[`label-${i + 1}`] = array[i]
+	}
+	console.log(array)
+	return obj
+}
+
 class LabelsForm extends Component {
-	constructor() {
-		super()
+	constructor(props) {
+		super(props)
 		this.state = {
 			labelsFormFilled: false,
-			inputLabels: null,
+			inputLabels: arrayToObj(props.inputLabels),
 		}
 	}
 	handleSubmit = e => {
@@ -37,8 +46,17 @@ class LabelsForm extends Component {
 			history.push('/plotter-form')
 		}
 	}
+	clear = () => {
+		const { inputLabels } = this.state
+		const updatedInputLabels = { ...inputLabels }
+		for (let prop in updatedInputLabels) {
+			updatedInputLabels[prop] = ''
+		}
+		this.setState({ inputLabels: updatedInputLabels })
+	}
 	render() {
 		const { totalInputLabels } = this.props
+		const { inputLabels } = this.state
 		return (
 			<div>
 				<h4>
@@ -56,15 +74,22 @@ class LabelsForm extends Component {
 								id={`label-${val}`}
 								name={`label-${val}`}
 								type='text'
+								value={inputLabels[`label-${val}`]}
 								required
 								onChange={this.handleChange}
 							/>
 						</div>
 					))}
+					<button
+						type='button'
+						className='btn btn-danger mr-2'
+						onClick={this.clear}>
+						Clear{' '}
+					</button>
 					<input
 						className='btn btn-info'
 						type='submit'
-						value='Continue'
+						value='Continue to enter input values'
 					/>
 				</form>
 			</div>
@@ -75,6 +100,7 @@ class LabelsForm extends Component {
 const mapStateToProps = state => ({
 	totalInputLabels: state.totalInputLabels,
 	plotterFormFilled: state.plotterFormFilled,
+	inputLabels: state.inputLabels,
 })
 
 const mapDispatchToProps = dispatch => ({

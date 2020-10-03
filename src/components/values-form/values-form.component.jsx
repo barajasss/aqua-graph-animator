@@ -10,7 +10,7 @@ class ValuesForm extends Component {
 		this.state = {
 			year: Number(props.startYear),
 			currentYearIndex: 0,
-			inputValues: [],
+			inputValues: props.inputValues,
 		}
 	}
 	componentDidMount() {
@@ -134,8 +134,17 @@ class ValuesForm extends Component {
 				<button className='btn btn-info mr-2' onClick={this.decrement}>
 					Previous
 				</button>
-				<button className='btn btn-info' onClick={this.increment}>
+				<button className='btn btn-info mr-2' onClick={this.increment}>
 					Next
+				</button>
+				<button
+					className='btn btn-danger'
+					onClick={() =>
+						this.setState({
+							inputValues: [],
+						})
+					}>
+					Clear
 				</button>
 			</div>
 		)
@@ -149,6 +158,7 @@ const mapStateToProps = state => ({
 	yearDifference: state.yearDifference,
 	totalYears: state.totalYears,
 	inputLabels: state.inputLabels,
+	inputValues: state.inputValues,
 })
 
 const mapDispatchToProps = dispatch => ({

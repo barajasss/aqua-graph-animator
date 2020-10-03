@@ -166,7 +166,7 @@ class PlotterForm extends Component {
 					className='btn btn-info'
 					style={{ minWidth: '100px' }}
 					type='submit'
-					value='Proceed to enter input values'
+					value='Proceed to enter label names'
 				/>
 			</form>
 		)

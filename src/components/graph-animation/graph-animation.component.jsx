@@ -135,6 +135,7 @@ class GraphAnimation extends Component {
 						<div className='labels'>
 							{positionedInputLabels.map((label, index) => (
 								<div
+									key={index}
 									className='label'
 									style={{ top: labelPositions[index] }}>
 									{label}
@@ -144,8 +145,10 @@ class GraphAnimation extends Component {
 					</div>
 					<div className='right-graph'>
 						<div className='measures'>
-							{plotterValuesArray.map(val => (
-								<div className='measure-point'>{val}</div>
+							{plotterValuesArray.map((val, index) => (
+								<div className='measure-point' key={index}>
+									{val}
+								</div>
 							))}
 						</div>
 						<div className='graph'>
@@ -160,6 +163,7 @@ class GraphAnimation extends Component {
 							</h5>
 							{currentLabelValues.map((val, index) => (
 								<div
+									key={index}
 									className='graph-item'
 									style={{
 										top: labelPositions[index],
