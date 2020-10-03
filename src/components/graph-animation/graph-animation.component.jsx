@@ -63,10 +63,15 @@ class GraphAnimation extends Component {
 				animationRunning: true,
 			})
 		}, 100)
-		const { inputValues, yearDifference, startYear } = this.props
+		const {
+			inputValues,
+			yearDifference,
+			startYear,
+			totalYears,
+		} = this.props
 		const animationInterval = setInterval(() => {
 			const { currentIndex } = this.state
-			if (currentIndex < 10) {
+			if (currentIndex < totalYears) {
 				const { positionedInputLabels } = this.state
 
 				const updatedCurrentIndex = currentIndex + 1
@@ -187,6 +192,7 @@ const mapStateToProps = state => ({
 	valuesFormFilled: state.valuesFormFilled,
 	inputLabels: state.inputLabels,
 	inputValues: state.inputValues,
+	totalYears: state.totalYears,
 })
 
 export default connect(mapStateToProps)(withRouter(GraphAnimation))

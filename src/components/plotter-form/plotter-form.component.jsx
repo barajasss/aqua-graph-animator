@@ -11,6 +11,7 @@ class PlotterForm extends Component {
 			valueName: '',
 			startYear: '',
 			yearDifference: '',
+			totalYears: 10,
 			endYear: '',
 			animationSpeed: 'medium',
 			totalInputLabels: '',
@@ -25,11 +26,12 @@ class PlotterForm extends Component {
 			() => {
 				// update the endYear
 
-				const { startYear, yearDifference } = this.state
-				let endYear = Number(startYear) + 10 * Number(yearDifference)
+				const { startYear, yearDifference, totalYears } = this.state
+				let endYear =
+					Number(startYear) + totalYears * Number(yearDifference)
 				endYear =
 					endYear === Number(startYear) ||
-					endYear === Number(yearDifference) * 10
+					endYear === Number(yearDifference) * totalYears
 						? ''
 						: endYear
 				this.setState({
@@ -59,7 +61,7 @@ class PlotterForm extends Component {
 			startYear,
 			yearDifference,
 			endYear,
-			animationSpeed,
+			totalYears,
 			totalInputLabels,
 		} = this.state
 		return (
@@ -106,13 +108,23 @@ class PlotterForm extends Component {
 						/>
 					</div>
 					<div className='form-group col'>
-						<label htmlFor='yearDifference'>
-							Enter difference:
-						</label>
+						<label htmlFor='yearDifference'>Year difference:</label>
 						<input
 							id='yearDifference'
 							name='yearDifference'
 							value={yearDifference}
+							type='number'
+							className='form-control'
+							onChange={this.onChange}
+							required
+						/>
+					</div>
+					<div className='form-group col'>
+						<label htmlFor='totalYears'>Total Years:</label>
+						<input
+							id='totalYears'
+							name='totalYears'
+							value={totalYears}
 							type='number'
 							className='form-control'
 							onChange={this.onChange}
@@ -130,50 +142,6 @@ class PlotterForm extends Component {
 							readOnly
 							disabled
 							onChange={this.onChange}
-							required
-						/>
-					</div>
-				</div>
-				<p>Animation Speed:</p>
-				<div className='row'>
-					<div className='form-group col-2'>
-						<label htmlFor='slow' className='mr-2'>
-							Slow{' '}
-						</label>
-						<input
-							id='slow'
-							type='radio'
-							name='animationSpeed'
-							value='slow'
-							onChange={this.onChange}
-							required
-						/>
-					</div>
-					<div className='form-group col-2'>
-						<label htmlFor='medium' className='mr-2'>
-							Medium{' '}
-						</label>
-
-						<input
-							id='medium'
-							type='radio'
-							name='animationSpeed'
-							onChange={this.onChange}
-							value='medium'
-							defaultChecked
-							required
-						/>
-					</div>
-					<div className='form-group col-2'>
-						<label htmlFor='fast' className='mr-2'>
-							Fast{' '}
-						</label>
-						<input
-							id='fast'
-							type='radio'
-							name='animationSpeed'
-							onChange={this.onChange}
-							value='fast'
 							required
 						/>
 					</div>

@@ -33,11 +33,15 @@ class ValuesForm extends Component {
 	}
 	handleSubmit = e => {
 		e.preventDefault()
-		const { updateOne, history, inputLabels } = this.props
+		const { updateOne, history, inputLabels, totalYears } = this.props
 		const { inputValues } = this.state
 		if (
-			countMatrixElements(inputValues, 11, inputLabels.length) ===
-			inputLabels.length * 11
+			countMatrixElements(
+				inputValues,
+				Number(totalYears) + 1,
+				inputLabels.length
+			) ===
+			inputLabels.length * (Number(totalYears) + 1)
 		) {
 			updateOne('inputValues', inputValues)
 			updateOne('valuesFormFilled', true)
@@ -66,17 +70,24 @@ class ValuesForm extends Component {
 	}
 	render() {
 		const { year } = this.state
-		let { inputLabels } = this.props
+		let { inputLabels, totalYears } = this.props
 		const { inputValues, currentYearIndex } = this.state
 		return (
 			<div>
 				<h4>Values Form</h4>
 				<p>Year: {year}</p>
-				<p>Form number: {currentYearIndex + 1} / 11</p>
+				<p>
+					Form number: {currentYearIndex + 1} /{' '}
+					{Number(totalYears) + 1}
+				</p>
 				<p>
 					Total filled:{' '}
-					{countMatrixElements(inputValues, 11, inputLabels.length)} /
-					{inputLabels.length * 11}
+					{countMatrixElements(
+						inputValues,
+						Number(totalYears) + 1,
+						inputLabels.length
+					)}{' '}
+					/{inputLabels.length * (Number(totalYears) + 1)}
 				</p>
 				<form onSubmit={this.handleSubmit}>
 					{inputLabels.map((label, index) => {
@@ -106,10 +117,10 @@ class ValuesForm extends Component {
 					})}
 					{countMatrixElements(
 						inputValues,
-						11,
+						Number(totalYears) + 1,
 						inputLabels.length
 					) ===
-						inputLabels.length * 11 && (
+						inputLabels.length * (Number(totalYears) + 1) && (
 						<div className='form-group'>
 							<input
 								type='submit'
@@ -136,6 +147,7 @@ const mapStateToProps = state => ({
 	labelsFormFilled: state.labelsFormFilled,
 	startYear: state.startYear,
 	yearDifference: state.yearDifference,
+	totalYears: state.totalYears,
 	inputLabels: state.inputLabels,
 })
 
