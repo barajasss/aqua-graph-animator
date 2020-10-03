@@ -1,0 +1,9 @@
+.header {
+	padding-top: 5px;
+	padding-left: 8px;
+	.large {
+		transform: scale(1.5) translate(-4px, -5px);
+		display: inline-block;
+		color: dodgerblue;
+	}
+}

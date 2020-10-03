@@ -1,0 +1,136 @@
+$measure-width: 70px;
+$measure-translateY: 10px;
+$measure-height: 35px;
+$label-height: 30px;
+$light-yellow: rgb(253, 253, 146);
+
+.main-plotter {
+	width: 950px;
+	border-radius: 5px;
+	background-color: #8fc7ff;
+	background: linear-gradient(to right, #8fc7ff, dodgerblue);
+	padding: 0;
+	padding-left: 10px;
+	padding-bottom: 10px;
+	display: flex;
+	flex-flow: row wrap;
+	box-shadow: 1.5px 1.5px 8px 1px #444;
+
+	.left-graph {
+		flex: 1;
+		position: relative;
+		max-width: 130px;
+		padding-top: $measure-height;
+
+		.play-btn {
+			padding: 1px 5px;
+			width: 120px;
+			position: absolute;
+			top: 35px;
+			transition: 0.2s;
+			&:hover {
+				background-color: white;
+				color: dodgerblue;
+			}
+		}
+
+		.labels {
+			position: relative;
+			.label {
+				width: 125px;
+				height: $label-height;
+				padding: 3px 0 0 8px;
+				position: absolute;
+				border-radius: 3px;
+				background-color: rgb(255, 117, 4);
+				border-left: 5px solid rgb(255, 234, 118);
+				border-right: 5px solid white;
+				color: white;
+				box-shadow: 1px 1px 5px 1px #555;
+			}
+		}
+	}
+	.right-graph {
+		flex: 1;
+	}
+}
+
+.graph {
+	width: $measure-width * 11;
+	height: 440px;
+	border-radius: 4px;
+	background-color: $light-yellow;
+	box-shadow: 1px 1px 7px 1px #888;
+	position: relative;
+	padding-right: 10px;
+	box-sizing: content-box;
+
+	& * {
+		box-sizing: border-box;
+	}
+
+	.value-name {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		font-size: 1.2rem;
+		padding: 0 0 5.5px 15px;
+		color: rgb(9, 111, 212);
+		font-weight: normal;
+		text-transform: capitalize;
+	}
+
+	.year {
+		padding-top: 10px;
+		color: white;
+		text-align: center;
+		color: rgb(83, 83, 238);
+	}
+	.graph-item {
+		height: $label-height;
+		background-color: orange;
+		color: white;
+		text-align: right;
+		padding-right: 10px;
+		box-shadow: 1px 1px 2px 1px #888;
+		border-radius: 0 1px 1px 0;
+		position: absolute;
+	}
+}
+
+.measures {
+	transform: translateY($measure-translateY);
+	width: $measure-width * 11;
+	height: $measure-height;
+	display: flex;
+	flex-flow: row wrap;
+	text-align: right;
+
+	.measure-point {
+		border-right: 1px solid;
+		padding-right: 5px;
+		flex: 1 $measure-width;
+		line-height: 1rem;
+		max-width: $measure-width;
+		min-width: $measure-width;
+		color: white;
+	}
+}
+
+.pop {
+	animation: pop 1s;
+	display: inline-block;
+}
+
+@keyframes pop {
+	0% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.2);
+		color: blue;
+	}
+	100% {
+		transform: scale(1);
+	}
+}
