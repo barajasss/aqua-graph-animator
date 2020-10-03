@@ -2,6 +2,7 @@ import React from 'react'
 import './App.css'
 
 import Header from './components/header/header.component'
+import Home from './components/home/home.component'
 
 import PlotterForm from './components/plotter-form/plotter-form.component'
 import LabelsForm from './components/labels-form/labels-form.component'
@@ -15,6 +16,7 @@ function App() {
 		<div className='container pt-3 pb-4'>
 			<Header />
 			<Switch>
+				<Route exact path='/' component={Home} />
 				<Route path='/plotter-form' component={PlotterForm} />
 				<Route path='/labels-form' component={LabelsForm} />
 				<Route path='/values-form' component={ValuesForm} />
